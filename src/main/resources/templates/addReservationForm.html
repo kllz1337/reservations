@@ -1,0 +1,45 @@
+<!--<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<!DOCTYPE html>-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: links">
+</head>
+
+<body>
+
+<div th:replace="fragments :: navigator"/>
+
+<div class="container marketing">
+    <div class="row">
+        <form method="post" th:action="@{/reservation/add}" th:object="${reservation}">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-2">
+                    <label for="participantName">Participant name:</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" id="participantName" th:field="*{participantName}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-2">
+                    <label for="event">Event:</label>
+                </div>
+                <div class="col-md-6">
+                    <select id="event" class="form-control" th:field="*{eventId}">
+                        <option th:each="reservationEvent : ${events}" th:text="${reservationEvent.eventName}" th:value="${reservationEvent.eventId}"></option>
+                    </select>
+                    <!--<input class="form-control" id="event" th:field="*{event}">-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <input class="form-control" type="submit" value="Add event">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:replace="fragments :: footer"/>
+
+</body>
+</html>

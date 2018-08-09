@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: links">
+</head>
+
+<body>
+
+<div th:replace="fragments :: navigator"/>
+
+<div class="container marketing">
+    <div class="row">
+        <form method="post" th:action="@{/reservation/details}" th:object="${reservation}">
+            <input th:value="*{id}" th:field="*{id}" hidden>
+            <input th:value="*{eventId}" th:field="*{eventId}" hidden>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-2">
+                    <label for="participantName">Participant name:</label>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="text" id="participantName" th:field="*{participantName}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-2">
+                    <label for="confirmationStatus">Status:</label>
+                </div>
+                <div class="col-lg-6" id="confirmationStatus">
+                    <div class="input-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="confirmationStatus" id="confirmed" th:checked="${status} == 'CONFIRMED' ? 'checked' : ''" th:value="CONFIRMED" th:field="*{status}">
+                            <label class="form-check-label" for="confirmed">
+                                Confirmed
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="confirmationStatus" id="unconfirmed" th:checked="${status} == 'UNCONFIRMED' ? 'checked' : ''" th:value="UNCONFIRMED" th:field="*{status}">
+                            <label class="form-check-label" for="unconfirmed">
+                                Unconfirmed
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <input class="btn btn-primary" type="submit" value="Save reservation">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div th:replace="fragments :: footer"/>
+
+</body>
+</html>

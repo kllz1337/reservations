@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: links">
+</head>
+
+<body>
+
+<div th:replace="fragments :: navigator"/>
+
+<div class="container marketing">
+<h3>Reservations list:</h3>
+    <div class="row col-md-offset-1 col-md-10">
+        <div class="row table-header">
+            <div class="col-md-1">Id</div>
+            <div class="col-md-3">Participant Name</div>
+            <div class="col-md-3">Event name</div>
+            <div class="col-md-2">Status</div>
+            <div class="col-md-3">Actions</div>
+        </div>
+        <div class="row table-row" th:each="reservation : ${reservationsList}">
+            <div class="col-md-1"><p th:text="${reservation.getId()}"></div>
+            <div class="col-md-3"><p th:text="${reservation.getName()}"></div>
+            <div class="col-md-3"><a th:text="${reservation.getReservationEvent().getEventName()}" th:href="@{'/event/details/'+${reservation.getReservationEvent().getEventId()}}"></a></div>
+            <div class="col-md-2"><p th:text="${reservation.getStatus()}"></div>
+            <div class="col-md-3 row">
+                <div class="col-md-6">
+                    <a th:href="@{'/reservation/details/' + ${reservation.getId()}}">Details</a>
+                </div>
+                <div class="col-md-6">
+                    <a th:href="@{'/reservation/remove/' + ${reservation.getId()}}">Remove</a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="alert alert-danger" th:if="${warningAttr} != null">
+                <p th:align="center" th:text="${warningAttr}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments :: footer"/>
+
+</body>
+</html>
