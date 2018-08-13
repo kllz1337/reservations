@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.sda.eventreservationmanager.model.dto.RegisterAppUserDto;
 import pl.sda.eventreservationmanager.service.AppUserService;
@@ -44,7 +45,7 @@ public class IndexController {
         }
         if(!appUserService.registerUser(dto)){
             model.addAttribute("user_dto", dto);
-            model.addAttribute("errorMessage", "This username is taken!");
+            model.addAttribute("errorMessage", "This username is already taken");
             return "registerForm";
         }
         return "redirect:/login";

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="links">
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,6 +12,8 @@
 </head>
 
 <body>
+
+<!--// sec:authorize="hasRole('ROLE_ADMIN') - jeżeli jesteś adminem to wyświetl element, o którym mówię :)-->
 
 <div th:fragment="navigator">
     <div class="navbar-wrapper">
@@ -49,6 +52,12 @@
                                 </ul>
                             </li>
                             <li><a th:href="@{/about}">About</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Log in</a></li>
+                            <li sec:authorize="isAnonymous()"><a th:href="@{/register}">Register</a></li>
+                            <li sec:authorize="isAnonymous()"><a th:href="@{/profile}">Profile</a></li>
+                            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
                         </ul>
                     </div>
                 </div>
